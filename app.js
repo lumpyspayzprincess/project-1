@@ -2,15 +2,39 @@
 
 // ?
 
-// * DOM VARIABLES
+// * DOM VARIABLES & EVENT LISTENERS
 
 const pageTitle = document.querySelector('h1')
 const gridOfCells = document.querySelector('.grid')
-const answerButton = document.querySelector('.answers')
-const btnForNewGame = document.querySelector('#new-game')
-const btnToEraseCell = document.querySelector('#erase')
-const btnToUndo = document.querySelector('#undo')
 const gridOfNum = document.querySelector('.number-grid')
+
+const answerButton = document.querySelector('.answers')
+answerButton.addEventListener('click', () => checkAnswers())
+function checkAnswers() {
+  // console.log("Check answers!")
+}
+
+const btnForNewGame = document.querySelector('#new-game')
+btnForNewGame.addEventListener('click', () => resetGame())
+function resetGame() {
+  // console.log("Reset game!")
+}
+
+const btnToEraseCell = document.querySelector('#erase')
+btnToEraseCell.addEventListener('click', () => eraseCell())
+function eraseCell() {
+  // console.log("Clear cell!")
+}
+
+const btnToUndo = document.querySelector('#undo')
+btnToUndo.addEventListener('click', () => undoMove())
+function undoMove() {
+  // console.log("Undo last move.")
+}
+
+const numbersInGrid = gridOfNum.querySelector('number-input')
+// const myArrayOfNumInputs = Array.from(numbersInGrid)
+console.log(numbersInGrid);
 
 // * ARRAYS
 
@@ -55,8 +79,9 @@ function createGrid() {
     btnSud.innerText = i  // ? Debugging trick, show the indexes.
     arrayOfSCellsObjs.push(btnSud) // ? Add my cell to my cells array.
     gridOfCells.appendChild(btnSud)
-    btnSud.addEventListener('click', () => testFuncCell())
+    btnSud.addEventListener('click', () => selectSCell())
     btnSud.addEventListener('mouseover', () => hoverOverCellBeforeSelecting())
+    btnSud.addEventListener('mouseout', () => noMoreHover())
   }
 }
 
@@ -69,12 +94,15 @@ const cellInGrid = document.querySelectorAll('.cells')
 
 const arrayOfNCellsObjs = []
 
+const clickedOnCell = document.querySelectorAll('clicked-on')
+
 function numberGrid() {
   for (let i = 0; i < 9; i++) {
     const btnNum = document.createElement('button')
     btnNum.classList.add('number-input')
-    btnNum.innerText = i + 1 
-    btnNum.setAttribute("id", `number-${i + 1}`)
+    const numValue = i + 1
+    btnNum.innerText = numValue
+    btnNum.setAttribute("id", `number-${numValue}`)
     arrayOfNCellsObjs.push(btnNum) 
     gridOfNum.appendChild(btnNum)
     btnNum.addEventListener('click', () => testFuncNum()) // nb add arrow function to stop func from running immediately
@@ -82,23 +110,38 @@ function numberGrid() {
 }
 numberGrid()
 
-const numbersInGrid = document.querySelectorAll('.number-input')
+
 
 // // console.log(numbersInGrid)
 
 // // console.log(arrayOfSCellsObjs)
 
-function testFuncCell() { // this is the function that should run when button is clicked on
-  console.log("Click me to change the contents of a cell on the grid.") 
+// * GAME CONTROLS
+
+let userInputCell = null
+let cellOnSGrid = null
+
+function selectSCell() { // this is the function that should run when button is clicked on
+  // console.log("Click me to change the contents of a cell on the grid.")
 }
 
+
 function testFuncNum() { // this is the function that should run when button is clicked on
-  console.log("Click me to select a number") 
+  event.target.classList.add("clicked-on") 
+  const valueOfCell = clickedOnCell.textContent
+  console.log(valueOfCell)
 }
 
 function hoverOverCellBeforeSelecting() {
-  console.log("You hovered over me!")
+  // console.log("You hovered over me!")
+  event.target.classList.add("hovered") //would like to not use 'event' if I can
 }
+
+function noMoreHover() {
+  // console.log("no more Hover!")
+  event.target.classList.remove("hovered")
+}
+
 
 // // function numIntoSGrid() {
 // //   console.log(numInputBtn.textContent)
