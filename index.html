@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap" rel="stylesheet">
+
+  <!-- JS -->
+  <script defer src="./app.js" charset="utf-8"></script>
+
+  <title>Souldoku</title>
+</head>
+
+<body>
+  
+  <header>
+    <h1>
+      <span class="multicolortext">Souldoku</span>
+    </h1>
+  </header>
+
+  <main>
+
+    <section class="sudoku-board">
+      <div class="grid">
+      </div>
+      <div class="answer-button">
+        <button class="answers">check answers</button>
+      </div>
+    </section>
+
+    <aside class="gameplay">
+      <article>
+        <h2>how to play</h2>
+        <p>Fill in  each row, column and square with the numbers 1-9, without repeating any numbers.</p>
+      </article>
+      <button id="new-game">New Game</button>
+      <div class="game-options">
+        <button id="erase">Erase</button>
+        <button id="undo">Undo</button>
+      </div>
+      <div class="number-grid">
+      </div>
+    </aside>
+  </main>
+  <footer>
+    <nav>
+    </nav>
+  </footer>
+</body>
+
+</html>

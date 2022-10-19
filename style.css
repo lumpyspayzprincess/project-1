@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ECEAEF;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  font-family: 'Press Start 2P', cursive;
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 80px
+}
+.multicolortext {
+  background-image: linear-gradient(to left, violet, indigo, green, blue, yellow, orange, red);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+main {
+  display: flex;
+  flex-grow: 1;
+}
+
+.sudoku-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  background-color: #ffffff;
+  flex: 1;
+  margin: 0px, 100px, 100px;
+
+}
+
+button, p {
+  font-family: 'Oxygen', sans-serif;
+
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 25px;
+}
+
+.cells {
+  /* width: 80px;
+  min-height: 80px; */
+  width: calc(100% * (1/9));
+  aspect-ratio : 1/1;
+}
+
+.gameplay {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #ffffff;
+  margin: 0;
+  width: 500px;
+}
+
+.article {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+p {
+  display: flex;
+  font-size: 30px;
+  justify-content: center;
+  margin: 100px;
+}
+
+.number-grid{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 100px;
+}
+
+.number-input{
+  border: 0.5px #000000 solid;
+  width: calc(100% * (1/3));
+  aspect-ratio : 1/1;
+  /* width: calc(33.3%); */
+  /* need to add height: to make square; */
+}
+
+#number-1 {
+  background-color: #F3C1C0;
+}
+#number-2 {
+  background-color: #FEEFC5;
+}
+#number-3 {
+  background-color: #F3DAD5;
+}
+#number-4 {
+  background-color: #D0E0F0;
+}
+#number-5 {
+  background-color: #CDC8E7;
+}
+#number-6 {
+  background-color: #F8D8BF;
+}
+#number-7 {
+  background-color: #DDEEDE;
+}
+#number-8 {
+  background-color: #E8BBD8;
+}
+#number-9 {
+  background-color: #C7F3C0;
+}
+
+.answers {
+  display: flex;
+  justify-content: center;
+  background-color: #D0E0F0;
+  text-transform: uppercase;
+  font-size: 40px;
+}
+
+.answer-button {
+  display: flex;
+  justify-content: center;
+  /* flex: 1; */
+  max-height: fit-content;
+}
+
+footer {
+  display: flex;
+}
+
+nav {
+  display: flex;
+}
+
+.hovered {
+  background-color: #FEEFC5;
+}
+
+.normal {
+  background-color: lightgray;
+}
