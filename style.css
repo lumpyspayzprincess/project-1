@@ -100,13 +100,14 @@ p {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 100px;
+  margin: 1px;
 }
 
 .number-input{
-  border: 0.5px #000000 solid;
+  border: 0.1px #000000 solid;
   width: calc(100% * (1/3));
   aspect-ratio : 1/1;
+  /* padding: 100px; */
   /* width: calc(33.3%); */
   /* need to add height: to make square; */
 }
@@ -168,4 +169,20 @@ nav {
 
 .normal {
   background-color: lightgray;
+}
+
+.game-options {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  padding: 20px;
+}
+
+.clicked-on {
+  border: green;
+  border-width: thick;
+}
+
+.correct {
+  background: #DDEEDE;
 }

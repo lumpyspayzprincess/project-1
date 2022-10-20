@@ -7,156 +7,238 @@
 const pageTitle = document.querySelector('h1')
 const gridOfCells = document.querySelector('.grid')
 const gridOfNum = document.querySelector('.number-grid')
+const arrayOfSCellsObjs = []
 
 const answerButton = document.querySelector('.answers')
 answerButton.addEventListener('click', () => checkAnswers())
 function checkAnswers() {
   // console.log("Check answers!")
+  // if .isCorrect = 1 -> then change colour -> run same code for each object
+  // if every obj contains .isCorrect = 1, then call winGame() else call highlightHints()is 
 }
 
 const btnForNewGame = document.querySelector('#new-game')
 btnForNewGame.addEventListener('click', () => resetGame())
 function resetGame() {
   // console.log("Reset game!")
+  // need to return value of "original array for gameplay"
 }
 
 const btnToEraseCell = document.querySelector('#erase')
 btnToEraseCell.addEventListener('click', () => eraseCell())
 function eraseCell() {
   // console.log("Clear cell!")
+  // clear cell should only happen when isCorrect != 1, else nothing works
 }
 
 const btnToUndo = document.querySelector('#undo')
 btnToUndo.addEventListener('click', () => undoMove())
 function undoMove() {
   // console.log("Undo last move.")
+  // need to return "original value of cell"
+
 }
+
 
 const numbersInGrid = gridOfNum.querySelector('number-input')
 // const myArrayOfNumInputs = Array.from(numbersInGrid)
-console.log(numbersInGrid);
+// console.log(numbersInGrid); //why doesn't this worrrrk
+
+// const editedCell = document.querySelector('')
 
 // * ARRAYS
 
-const arrayOfAnswersRow1 = [1,7,9,4,3,2,5,6,8]
-const arrayOfAnswersRow2 = [6,5,3,8,9,7,1,2,4]
-const arrayOfAnswersRow3 = [8,2,4,5,1,6,9,3,7]
-const arrayOfAnswersRow4 = [9,1,5,6,8,3,7,4,2]
-const arrayOfAnswersRow5 = [2,4,6,1,7,5,8,9,3]  
-const arrayOfAnswersRow6 = [3,8,7,2,4,9,6,1,5]
-const arrayOfAnswersRow7 = [5,6,1,7,2,4,3,8,9]
-const arrayOfAnswersRow8 = [4,9,8,3,5,1,2,7,6]
-const arrayOfAnswersRow9 = [7,3,2,9,6,8,4,5,1]
+const arrayOfAnswersRow1 = [1, 7, 9, 4, 3, 2, 5, 6, 8]
+const arrayOfAnswersRow2 = [6, 5, 3, 8, 9, 7, 1, 2, 4]
+const arrayOfAnswersRow3 = [8, 2, 4, 5, 1, 6, 9, 3, 7]
+const arrayOfAnswersRow4 = [9, 1, 5, 6, 8, 3, 7, 4, 2]
+const arrayOfAnswersRow5 = [2, 4, 6, 1, 7, 5, 8, 9, 3]
+const arrayOfAnswersRow6 = [3, 8, 7, 2, 4, 9, 6, 1, 5]
+const arrayOfAnswersRow7 = [5, 6, 1, 7, 2, 4, 3, 8, 9]
+const arrayOfAnswersRow8 = [4, 9, 8, 3, 5, 1, 2, 7, 6]
+const arrayOfAnswersRow9 = [7, 3, 2, 9, 6, 8, 4, 5, 1]
 
 const arrayOfAnswers = arrayOfAnswersRow1.concat(arrayOfAnswersRow2).concat(arrayOfAnswersRow3).concat(arrayOfAnswersRow4).concat(arrayOfAnswersRow5).concat(arrayOfAnswersRow6).concat(arrayOfAnswersRow7).concat(arrayOfAnswersRow8).concat(arrayOfAnswersRow9)
 
-class SudoduCell {
-  constructor(){
-    this.number = 0,
-    this.isCorrect = 0,
-    this.canBeEdited = 1,
-    this.canEdit = 1,
-    this.isSelected = 0
-  }
-}
+const startingArray = arrayOfAnswers.map((numberInCell) => (numberInCell))
+
+let randomNumber = null
+
+
+// function updateStartingArray() {
+//   for (let i = 0; i < 20 ; i + 7)
+//     randomNumber = Math.floor(Math.random() * 81 + 1)
+//   startingArray[randomNumber] = 0
+//   console.log(randomNumber)
+// }
+
+// updateStartingArray() 
 
 // * CREATING GRIDS
 
 // ? sudoku
-
-const arrayOfSCellsObjs = []
 const amountOfNumbersInGrid = arrayOfAnswers.length
 
 const width = Math.sqrt(amountOfNumbersInGrid)
-const newCellInArray = new SudoduCell
-const numberInCell = newCellInArray.number
 
 function createGrid() {
-  for (let i = 0; i < amountOfNumbersInGrid; i++) { 
+  for (let iOfS = 0; iOfS < amountOfNumbersInGrid; iOfS++) {
     const btnSud = document.createElement('button')
     btnSud.classList.add('cells')
-    btnSud.setAttribute("id", `index-${i}`)
-    btnSud.innerText = i  // ? Debugging trick, show the indexes.
+    btnSud.setAttribute("id", `index-${iOfS}`)
+    // btnSud.innerText = i  // ? Debugging trick, show the indexes.
     arrayOfSCellsObjs.push(btnSud) // ? Add my cell to my cells array.
     gridOfCells.appendChild(btnSud)
-    btnSud.addEventListener('click', () => selectSCell())
+    btnSud.addEventListener('click', () => selectSCell(iOfS))
     btnSud.addEventListener('mouseover', () => hoverOverCellBeforeSelecting())
-    btnSud.addEventListener('mouseout', () => noMoreHover())
+    btnSud.addEventListener('mouseout', () => noMoreHoverOrSelect())
   }
 }
 
+// console.log(arrayOfSCellsObjs)
+
 createGrid()
 
+//input number into each s cell //used startingArray so the contents can be changed and match arrayOfAnswers
+startingArray.forEach((num, index) => {
+  arrayOfSCellsObjs[index].innerText = num
+})
+
+// change arrayOfAnswers to other array containing numbers
+
 const cellInGrid = document.querySelectorAll('.cells')
+const clickedOnSCell = document.querySelectorAll('clicked-on')
+
+
 
 
 // ? number
 
 const arrayOfNCellsObjs = []
 
-const clickedOnCell = document.querySelectorAll('clicked-on')
 
 function numberGrid() {
-  for (let i = 0; i < 9; i++) {
+  for (let iOfN = 0; iOfN < 9; iOfN++) {
     const btnNum = document.createElement('button')
     btnNum.classList.add('number-input')
-    const numValue = i + 1
+    const numValue = iOfN + 1
     btnNum.innerText = numValue
+    btnNum.value = numValue
     btnNum.setAttribute("id", `number-${numValue}`)
-    arrayOfNCellsObjs.push(btnNum) 
+    arrayOfNCellsObjs.push(btnNum)
     gridOfNum.appendChild(btnNum)
-    btnNum.addEventListener('click', () => testFuncNum()) // nb add arrow function to stop func from running immediately
+    btnNum.addEventListener('click', () => selectNCell(iOfN)) // nb add arrow function to stop func from running immediately
+    btnNum.addEventListener('mouseout', function () {
+      // btnNum.classList.remove("clicked-on")
+    })
   }
 }
 numberGrid()
 
+// ? CREATE ARRAY OF OBJS TO MATCH NUM TO
+
+class SudoduCell {
+  constructor() {
+    this.number = 0,
+      this.isCorrect = 0,
+      this.canBeEdited = 1,
+      this.canEdit = 1,
+      this.isSelected = 0
+  }
+}
+const newCellInArray = new SudoduCell()
+const numberInCell = newCellInArray.number
+// const arrayOfObjsMatch =  []
+let num = null // num is the index of the cell that has been selected -> need event listener to reassign num to index of cell selected
+
+// num = 0
+
+// function createArrayToMatchNums() {
+//   for (let i = 0; i < amountOfNumbersInGrid; i++) { 
+//     arrayOfObjsMatch.push(newCellInArray)
+// }
+
+// createArrayToMatchNums()
+
+// function fillSomeAns() {
+// for ((i % 3 === 0); i < amountOfNumbersInGrid; i++) {
+//       newCellInArray.number[i] = arrayOfAnswers[i]
+//       return newCellInArray.number[i]
+//     }
 
 
-// // console.log(numbersInGrid)
+// console.log(arrayOfObjsMatch)
 
-// // console.log(arrayOfSCellsObjs)
+
+
+// function thisCellIsCorrect() {
+//   this.isCorrect = 1
+//   this.canBeEdited = 0
+//   this.canEdit = 0
+//   this.isSelected = 0
+//   return this.isCorrect
+//   return this.canBeEdited
+//   return this.canEdit
+//   return this.isSelected
+// }
 
 // * GAME CONTROLS
 
 let userInputCell = null
 let cellOnSGrid = null
 
-function selectSCell() { // this is the function that should run when button is clicked on
-  // console.log("Click me to change the contents of a cell on the grid.")
+let indexOfSelectedNCell = -1
+let valueOfNCell = null
+
+function selectNCell(iOfN) { // when a cell from the number grid is clicked on, the value of the cell is saved and changes the value of the starting array
+  indexOfSelectedNCell = iOfN
+  valueOfNCell = iOfN + 1
+  // console.log(valueOfNCell)
+  arrayOfSCellsObjs[indexOfSelectedSCell].innerText = valueOfNCell
+  startingArray[indexOfSelectedSCell] = valueOfNCell
+  // console.log(indexOfSelectedNCell,startingArray)
+
 }
 
 
-function testFuncNum() { // this is the function that should run when button is clicked on
-  event.target.classList.add("clicked-on") 
-  const valueOfCell = clickedOnCell.textContent
-  console.log(valueOfCell)
+let indexOfSelectedSCell = -1
+
+function selectSCell(iOfS) { // this is the function that should run when button is clicked on
+  indexOfSelectedSCell = iOfS
+  // console.log(iOfS)
+  arrayOfSCellsObjs[iOfS].classList.add('clicked-on')
+  const buttonClicked = arrayOfSCellsObjs[indexOfSelectedSCell]
+  // console.log(buttonClicked)
+  let whateverIsInSCell = buttonClicked.innerText
+  console.log(whateverIsInSCell)
+  matchCell()
 }
+
+
+
+function matchCell() {
+  const gameWon = startingArray.every((num, i) => {
+    return arrayOfAnswers[i] === num
+  })
+  if (gameWon) {
+// show winning alert
+  }
+}
+
+
+
 
 function hoverOverCellBeforeSelecting() {
   // console.log("You hovered over me!")
   event.target.classList.add("hovered") //would like to not use 'event' if I can
 }
 
-function noMoreHover() {
+
+function noMoreHoverOrSelect() {
+  // interval -> if (newValueInSCell != oldValueinSCell)
   // console.log("no more Hover!")
   event.target.classList.remove("hovered")
+  // event.target.classList.remove("clicked-on") 
 }
 
-
-// // function numIntoSGrid() {
-// //   console.log(numInputBtn.textContent)
-// // }
-
-// // numIntoSGrid()
-
-// // // * CHECKING ANSWERS
-
-
-
-// // // function checkNumber(numberInCell) {
-// // //   if (numberInCell ===)
-// // // }
-
-// // const selectedSudokuCell = null
-// // const selectedNumCell = null
-// // let errors = 0
+// arrayOfSCellsObjs[iOfS]
