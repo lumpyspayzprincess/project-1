@@ -163,7 +163,7 @@ nav {
   display: flex;
 }
 
-.hovered {
+.hovered, .clicked-on {
   background-color: #FEEFC5;
 }
 
@@ -178,11 +178,11 @@ nav {
   padding: 20px;
 }
 
-.clicked-on {
-  border: green;
-  border-width: thick;
-}
 
 .correct {
   background: #DDEEDE;
+}
+
+.hide {
+  color: transparent;
 }

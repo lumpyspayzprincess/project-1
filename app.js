@@ -10,34 +10,36 @@ const gridOfNum = document.querySelector('.number-grid')
 const arrayOfSCellsObjs = []
 
 const answerButton = document.querySelector('.answers')
-answerButton.addEventListener('click', () => checkAnswers())
-function checkAnswers() {
-  // console.log("Check answers!")
-  // if .isCorrect = 1 -> then change colour -> run same code for each object
-  // if every obj contains .isCorrect = 1, then call winGame() else call highlightHints()is 
-}
+answerButton.addEventListener('click', () => matchCell())
+
 
 const btnForNewGame = document.querySelector('#new-game')
 btnForNewGame.addEventListener('click', () => resetGame())
 function resetGame() {
   // console.log("Reset game!")
-  // need to return value of "original array for gameplay"
+  arrayOfWhatsOnBoard.forEach((num, index) => {
+    arrayOfSCellsObjs[index].innerText = num
+  })
 }
 
 const btnToEraseCell = document.querySelector('#erase')
 btnToEraseCell.addEventListener('click', () => eraseCell())
 function eraseCell() {
   // console.log("Clear cell!")
+  // arrayOfSCellsObjs[indexOfSelectedSCellindexOfSelectedSCell].classList.add("hide")
   // clear cell should only happen when isCorrect != 1, else nothing works
+  console.log(arrayOfSCellsObjs[indexOfSelectedSCell])
+  arrayOfSCellsObjs[indexOfSelectedSCell].innerText = "0"
 }
 
-const btnToUndo = document.querySelector('#undo')
-btnToUndo.addEventListener('click', () => undoMove())
-function undoMove() {
-  // console.log("Undo last move.")
-  // need to return "original value of cell"
 
-}
+// const btnToUndo = document.querySelector('#undo')
+// btnToUndo.addEventListener('click', () => undoMove())
+// function undoMove() {
+//   // console.log("Undo last move.")
+//   // need to return "original value of cell"
+
+// }
 
 
 const numbersInGrid = gridOfNum.querySelector('number-input')
@@ -60,19 +62,21 @@ const arrayOfAnswersRow9 = [7, 3, 2, 9, 6, 8, 4, 5, 1]
 
 const arrayOfAnswers = arrayOfAnswersRow1.concat(arrayOfAnswersRow2).concat(arrayOfAnswersRow3).concat(arrayOfAnswersRow4).concat(arrayOfAnswersRow5).concat(arrayOfAnswersRow6).concat(arrayOfAnswersRow7).concat(arrayOfAnswersRow8).concat(arrayOfAnswersRow9)
 
-const startingArray = arrayOfAnswers.map((numberInCell) => (numberInCell))
+const arrayOfAnswersRow1a = [0, 0, 0, 4, 0, 2, 0, 6, 0]
+const arrayOfAnswersRow2a = [0, 5, 3, 0, 9, 7, 0, 0, 4]
+const arrayOfAnswersRow3a = [0, 2, 4, 5, 0, 6, 9, 0, 7]
+const arrayOfAnswersRow4a = [0, 0, 5, 6, 0, 3, 7, 4, 0]
+const arrayOfAnswersRow5a = [0, 0, 6, 0, 0, 5, 0, 0, 3]
+const arrayOfAnswersRow6a = [0, 0, 0, 2, 4, 9, 6, 0, 5]
+const arrayOfAnswersRow7a = [5, 6, 0, 7, 0, 4, 3, 0, 9]
+const arrayOfAnswersRow8a = [0, 9, 0, 0, 5, 0, 0, 9, 6]
+const arrayOfAnswersRow9a = [0, 3, 2, 0, 6, 0, 4, 0, 0]
 
-let randomNumber = null
+const arrayOfWhatsOnBoard = arrayOfAnswersRow1a.concat(arrayOfAnswersRow2a).concat(arrayOfAnswersRow3a).concat(arrayOfAnswersRow4a).concat(arrayOfAnswersRow5a).concat(arrayOfAnswersRow6a).concat(arrayOfAnswersRow7a).concat(arrayOfAnswersRow8a).concat(arrayOfAnswersRow9a)
+
+const startingArray = arrayOfWhatsOnBoard.map((numberInCell) => (numberInCell))
 
 
-// function updateStartingArray() {
-//   for (let i = 0; i < 20 ; i + 7)
-//     randomNumber = Math.floor(Math.random() * 81 + 1)
-//   startingArray[randomNumber] = 0
-//   console.log(randomNumber)
-// }
-
-// updateStartingArray() 
 
 // * CREATING GRIDS
 
@@ -122,7 +126,7 @@ function numberGrid() {
     const btnNum = document.createElement('button')
     btnNum.classList.add('number-input')
     const numValue = iOfN + 1
-    btnNum.innerText = numValue
+    btnNum.innerText = Number(numValue)
     btnNum.value = numValue
     btnNum.setAttribute("id", `number-${numValue}`)
     arrayOfNCellsObjs.push(btnNum)
@@ -197,7 +201,8 @@ function selectNCell(iOfN) { // when a cell from the number grid is clicked on, 
   arrayOfSCellsObjs[indexOfSelectedSCell].innerText = valueOfNCell
   startingArray[indexOfSelectedSCell] = valueOfNCell
   // console.log(indexOfSelectedNCell,startingArray)
-
+  if (valueOfNCell === startingArray[indexOfSelectedSCell])
+ unSelectThis()
 }
 
 
@@ -210,20 +215,25 @@ function selectSCell(iOfS) { // this is the function that should run when button
   const buttonClicked = arrayOfSCellsObjs[indexOfSelectedSCell]
   // console.log(buttonClicked)
   let whateverIsInSCell = buttonClicked.innerText
+  // if (arrayOfSCellsObjs[indexi].innerText !== "0")
+  //   arrayOfSCellsObjs[iOfS].classList.remove('hide')
   console.log(whateverIsInSCell)
-  matchCell()
+
 }
 
 
 
 function matchCell() {
   const gameWon = startingArray.every((num, i) => {
-    return arrayOfAnswers[i] === num
+    return arrayOfSCellsObjs[i].innerText === num
   })
   if (gameWon) {
-// show winning alert
+    alert("Congratulations! You've won the game!")
+  } else {
+    alert("Still a bit more to do! Keep trying.")
   }
 }
+// have a feeling it has to do with data types
 
 
 
@@ -242,3 +252,28 @@ function noMoreHoverOrSelect() {
 }
 
 // arrayOfSCellsObjs[iOfS]
+
+
+
+function hideContents() {
+  for (let indexi = 0; indexi < arrayOfAnswers.length; indexi++)
+    if (arrayOfSCellsObjs[indexi].innerText === "0") {
+      arrayOfSCellsObjs[indexi].classList.add("hide")
+    } else {
+      arrayOfSCellsObjs[indexi].classList.remove("hide")
+    }
+}
+
+setInterval(hideContents, 10)
+
+function unSelectThis() {
+  if (arrayOfSCellsObjs[indexOfSelectedSCell].innerText !== 0)
+    arrayOfSCellsObjs[indexOfSelectedSCell].classList.remove("clicked-on")
+  console.log(arrayOfSCellsObjs[indexOfSelectedSCell])
+}
+
+function completeGame()  {
+  arrayOfAnswers.forEach((num, index) => {
+    arrayOfSCellsObjs[index].innerText = num
+  })
+}
