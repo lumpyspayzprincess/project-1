@@ -217,7 +217,7 @@ function selectSCell(iOfS) { // this is the function that should run when button
   let whateverIsInSCell = buttonClicked.innerText
   // if (arrayOfSCellsObjs[indexi].innerText !== "0")
   //   arrayOfSCellsObjs[iOfS].classList.remove('hide')
-  console.log(whateverIsInSCell)
+  // console.log(whateverIsInSCell)
 
 }
 
@@ -269,7 +269,7 @@ setInterval(hideContents, 10)
 function unSelectThis() {
   if (arrayOfSCellsObjs[indexOfSelectedSCell].innerText !== 0)
     arrayOfSCellsObjs[indexOfSelectedSCell].classList.remove("clicked-on")
-  console.log(arrayOfSCellsObjs[indexOfSelectedSCell])
+  // console.log(arrayOfSCellsObjs[indexOfSelectedSCell])
 }
 
 function completeGame()  {
@@ -277,5 +277,5 @@ function completeGame()  {
     arrayOfSCellsObjs[index].innerText = num
     startingArray[index]= num
   })
-  console.log(arrayOfAnswers, startingArray)
+  // console.log(arrayOfAnswers, startingArray)
 }
