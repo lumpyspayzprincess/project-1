@@ -1,9 +1,16 @@
 # project-1
 
 ## Brief
+Create a game that includes many of the concepts that were shown over the first 6 weeks of the course. Reference: [Original Readme](./project-1-original-readme.md)
+
+This includes:
+
+###
+1. HTML
+2. CSS
+3. JavaScript
 
 ## Whiteboarding
-
 Whiteboard created with Excalidraw.\
 ![Whiteboard](./images/whiteboard.png)
 

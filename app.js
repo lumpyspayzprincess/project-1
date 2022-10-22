@@ -225,7 +225,7 @@ function selectSCell(iOfS) { // this is the function that should run when button
 
 function matchCell() {
   const gameWon = startingArray.every((num, i) => {
-    return arrayOfSCellsObjs[i].innerText === num
+    return arrayOfAnswers[i] === num
   })
   if (gameWon) {
     alert("Congratulations! You've won the game!")
@@ -275,5 +275,7 @@ function unSelectThis() {
 function completeGame()  {
   arrayOfAnswers.forEach((num, index) => {
     arrayOfSCellsObjs[index].innerText = num
+    startingArray[index]= num
   })
+  console.log(arrayOfAnswers, startingArray)
 }
