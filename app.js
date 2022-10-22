@@ -28,7 +28,7 @@ function eraseCell() {
   // console.log("Clear cell!")
   // arrayOfSCellsObjs[indexOfSelectedSCellindexOfSelectedSCell].classList.add("hide")
   // clear cell should only happen when isCorrect != 1, else nothing works
-  console.log(arrayOfSCellsObjs[indexOfSelectedSCell])
+  // console.log(arrayOfSCellsObjs[indexOfSelectedSCell])
   arrayOfSCellsObjs[indexOfSelectedSCell].innerText = "0"
 }
 
