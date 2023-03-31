@@ -279,3 +279,6 @@ function completeGame()  {
   })
   // console.log(arrayOfAnswers, startingArray)
 }
+
+// Souldoku notes
+  // refactoring, getting js into ts, backtracking,  
