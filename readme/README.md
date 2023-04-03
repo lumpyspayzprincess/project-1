@@ -58,6 +58,7 @@ The app must:
 I used Excalidraw to create my sketches and create the pseudocode to figure out how the grade should look.
 
 [Figma](https://www.figma.com/file/l1LtEfj9QcG6IgvStj36Bx/Souldoku?node-id=0%3A1)
+
 I then used Figma to make more of an elaborate prototype for the look and behaviour of the game.
 
 This was a single-person project, so I was responsible for the design, engineering and deployment of the project
