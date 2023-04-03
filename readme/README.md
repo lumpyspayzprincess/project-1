@@ -52,12 +52,15 @@ Be a working game, built by you, hosted somewhere on the internet
 Include a git repository hosted on Github, with a link to your hosted game, and frequent commits dating back to the very beginning of the project; and a readme.md file with explanations of the technologies used, the approach taken, installation instructions, unsolved problems, etc.
 
 ## Planning
-![Whiteboard](readme/Screenshot 2022-10-06 at 19.01.18.png)
+![Whiteboard](readme/exc.png)
 
 I used Excalidraw to create my sketches and create the pseudocode to figure out how the grade should look.
 
 [Figma](https://www.figma.com/file/l1LtEfj9QcG6IgvStj36Bx/Souldoku?node-id=0%3A1)
-I then used Figma to make more of an elaborate prototype for the look and behaviour of the game .
+I then used Figma to make more of an elaborate prototype for the look and behaviour of the game.
+
+I also found a font from Google Fonts after searching "game font free"\
+[Link to font](https://fonts.google.com/specimen/Press+Start+2P)
 
 This was a single-person project, so I was responsible for the design, engineering and deployment of the project
 
@@ -112,7 +115,7 @@ To get around that, I had multiple arrays of answers, with numbers between 1-9, 
 
 Once that was done, I then created the grid by defining the width of the grid that was based on the length of the arrays that were being used. This ensured that every number in the array of arrays would then populate its own cell within the Sudoku grid.
 
-### Code
+#### DOM
 `
   const amountOfNumbersInGrid = arrayOfAnswers.length
   const width = Math.sqrt(amountOfNumbersInGrid)
@@ -136,7 +139,7 @@ I was then able to use the same logic to create the number grid that input the n
 
 I also added some very cool features!
 
-### Hovering over the cell to show that the cell will be selected:
+#### Hovering over the cell to show that the cell will be selected:
 
 `
 function hoverOverCellBeforeSelecting() {
@@ -150,36 +153,38 @@ This shows the cell that is being hovered by changing the class of the element.
 `function noMoreHoverOrSelect() {
   // interval -> if (newValueInSCell != oldValueinSCell)
   // console.log("no more Hover!")
-  event.target.classList.remove("hovered")
+  event.target.classList.remove("hovered")}
 `
 
 The class of the cell in the HTML is managed by JS using the DOM. The JS adds “hovered” to the class of the element that has been hovered over with an event listener. The background colour in the CSS for elements with the “hovered” class is yellow, so the cell turns yellow. It is then removed with another event listener that works on with an interval to see if the cell is still hovered over. If not, the class is removed from the cell, the background is back to its original.
 
-### To win the game
+#### To win the game
 
 `function completeGame()  {
   arrayOfAnswers.forEach((num, index) => {
     arrayOfSCellsObjs[index].innerText = num
     startingArray[index]= num
-  })
+  })}
 `
 
 This forces the game to be completed by copying the numbers in the original array into the cells. This was useful for testing without inputting the numbers.
 
 ## Challenges
 
-### Randomising the numbers
+- #### Randomising the numbers
+
 I initially wanted to create a game that randomly generated numbers that were inserted into the grid with each refresh of the game.
 
 I stepped away from that idea as I had trouble making sure that the 81 numbers for the answers were put in an order where there was only one of each digit seen horizontally, vertically and within a grid, and there were enough empty cells to make the game challenging but not too difficult for the user.
 
 I got around this by having a set of static arrays which included numbers between 0 and 9 that I knew logically matched the rules of the Sudoku that were displayed when the page loaded. Any cells with the “0” in its contents, had its contents set to `display: none` and were able to be edited by the user.
 
-### Matching the number in the number grid to the cell grid
+- #### Matching the number in the number grid to the cell grid
 
 I managed to do this, but had to make sure that the data types were the same as I was using the “innerText” property to input numbers into the cells, which meant that I could not match the numbers as I wanted. 
 
-### Aesthetics
+- #### Aesthetics
+
 I had trouble using Flexbox and CSS look exactly the way I wanted but needed more time.
 
 ## Wins
@@ -206,32 +211,27 @@ I struggled with understanding how `NodeLists` seen on the webpage corresponded 
 
 ## Future Improvements
 
-### Refactoring the code:
+- ### Refactoring the code:
 I’ve grown to enjoy using TypeScript and React and feel that the code would be cleaner and it would be easier to incorporate code that could make the game more difficult without repeating key parts of code.
 
 I’d also like to remove any existing redundancies and repeated code and decrease my reliance on using the DOM to create and manipulate elements.
 
-### Implement crayon interface 
+- ### Implement crayon interface 
 In the future, I’d like for the game to use crayons instead of number grids (see Excalidraw).
 
 I will need to create a transparent PNG and associate a number to a colour which will fill the crayon.
 
-### Make the game random so there is a different grid when a user refreshes
+- ### Make the game random so there is a different grid when a user refreshes
 
-### A timer
+- ### A timer
 
 It would be nice to include a time that starts when the page loads and ends when the game is completed.
 
-### An improved win screen
+- ### An improved win screen
 
-### Different levels
-### The ability to play with others online
+- ### Different levels
+
+- ### The ability to play with others online
 
 
-
-#### Fonts
-Font from Google Fonts after searching "game font free"\
-[Link to font](https://fonts.google.com/specimen/Press+Start+2P)
-
-* **A ``readme.md`` file** with explanations of the technologies used, the approach taken, installation instructions, unsolved problems, etc.
 
